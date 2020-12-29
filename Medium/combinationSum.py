@@ -41,18 +41,18 @@ class Solution(object):
         """
         res = []
         candidates.sort()
-        self.dfs(candidates, target, 0, res, [])
+        self.dfs(candidates, target, res, [])
         return res
     
     
-    def dfs(self, nums, target, index, res, path):
+    def dfs(self, nums, target, res, path):
         if target < 0:
             return
         elif target == 0:
             res.append(path)
             return
-        for i in range(index, len(nums)):
-            if nums[index] > target:
+        for i in range(len(nums)):
+            if nums[0] > target:
                 return
-            self.dfs(nums, target - nums[i], i, res, path + [nums[i]])
+            self.dfs(nums[i:], target - nums[i], res, path + [nums[i]])
         
