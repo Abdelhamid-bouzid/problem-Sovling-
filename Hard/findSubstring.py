@@ -22,30 +22,18 @@ Output: [6,9,12]
 '''
 class Solution:
     def findSubstring(self, S, L):
-        ans=[]
-        Dict = dict.fromkeys(L,0)
-        for word in L:
-            Dict[word]=Dict[word]+1
-              
+        ans  = []
+        Dict = Counter(L)      
         
         totWord = len(L)
         wordLen = len(L[0])
         slen =len(S) - totWord * wordLen;
         for  i in range(0,slen+1):
-            cnt =dict.fromkeys(L,0)
-            okNum=0
-            for k in range(0,totWord):
-                cur=S[i+k*wordLen:i+(k+1)*wordLen]
-                if(cur in Dict ):
-                    cnt[cur]=cnt[cur] + 1
-                    if(cnt[cur] > Dict[cur]):
-                        break
-                    okNum=okNum + 1
-            
-                          
-            if(okNum==totWord):
+            ll    = Counter([S[i+k*wordLen:i+(k+1)*wordLen] for k in range(totWord)])
+            if ll==Dict:
                 ans.append(i)
         
         return ans
+    
         
         
